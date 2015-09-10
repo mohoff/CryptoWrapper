@@ -11,6 +11,8 @@ import (
 )
 
 // TODO: support n byte pad (see TLS), not only 0 byte pad
+// TODO: (DES): Support different key length and key derivations, e.g. EDE2 etc.
+// TODO: support 3DES
 // TODO: write tests
 
 // Assign uints to different ciphers and modes of operation
