@@ -1,15 +1,21 @@
 package main
 
 import (
-	_ "crypto/cipher"
+	"crypto/cipher"
 	"crypto/des"
 	"errors"
 	_ "fmt"
 )
 
-func encryptDES(input, key, iv []byte) ([]byte, error) {
-	block, err := des.NewCipher(key)
-	//block, err := des.NewTripleDESCipher(key)
+func encryptDES(input, key, iv []byte, tripleDES bool) ([]byte, error) {
+	var block cipher.Block
+	var err error
+	if tripleDES {
+		block, err = des.NewTripleDESCipher(key)
+	} else {
+		block, err = des.NewCipher(key)
+	}
+
 	if err != nil {
 		return nil, errors.New("Couldn't create block cipher.")
 	}
@@ -26,9 +32,15 @@ func encryptDES(input, key, iv []byte) ([]byte, error) {
 	return output, nil
 }
 
-func decryptDES(input, output, key []byte) error {
-	block, err := des.NewCipher(key)
-	//block, err := des.NewTripleDESCipher(key)
+func decryptDES(input, output, key []byte, tripleDES bool) error {
+	var block cipher.Block
+	var err error
+	if tripleDES {
+		block, err = des.NewTripleDESCipher(key)
+	} else {
+		block, err = des.NewCipher(key)
+	}
+
 	if err != nil {
 		return errors.New("Couldn't create block cipher.")
 	}

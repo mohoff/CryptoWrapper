@@ -6,7 +6,7 @@ import (
 	"errors"
 )
 
-func encryptAES(input []byte, output []byte, key, iv []byte, mode uint) error {
+func encryptAES(input []byte, output []byte, key, iv []byte, mode Mode) error {
 	block, err := aes.NewCipher(key)
 	if err != nil {
 		return errors.New("Couldn't create block cipher.")
@@ -41,7 +41,7 @@ func encryptAES(input []byte, output []byte, key, iv []byte, mode uint) error {
 	return nil
 }
 
-func decryptAES(input []byte, output []byte, key []byte, mode uint) error {
+func decryptAES(input []byte, output []byte, key []byte, mode Mode) error {
 	block, err := aes.NewCipher(key)
 	if err != nil {
 		return errors.New("Couldn't create block cipher.")
