@@ -6,6 +6,8 @@ import (
 	"errors"
 )
 
+// encryptAES enrypts plaintext input with passed key, IV and mode in AES block cipher;
+// and returns ciphertext output
 func encryptAES(input []byte, output []byte, key, iv []byte, mode Mode) error {
 	block, err := aes.NewCipher(key)
 	if err != nil {
@@ -41,6 +43,8 @@ func encryptAES(input []byte, output []byte, key, iv []byte, mode Mode) error {
 	return nil
 }
 
+// decryptAES derypts ciphertext input with passed key and mode (IV is contained in input)
+// in AES block cipher; and returns plaintext output
 func decryptAES(input []byte, output []byte, key []byte, mode Mode) error {
 	block, err := aes.NewCipher(key)
 	if err != nil {

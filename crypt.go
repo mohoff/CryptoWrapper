@@ -2,12 +2,7 @@ package main
 
 import (
 	"crypto/aes"
-	_ "crypto/des"
-	_ "encoding/base64"
-	_ "encoding/hex"
-	_ "errors"
 	"fmt"
-	//"log"
 )
 
 // TODO: support n byte pad (see TLS), not only 0 byte pad
@@ -31,6 +26,8 @@ const (
 )
 
 func main() {
+	// Some testing
+
 	//key := []byte("1234567890123456") // aes, 16 bytes
 	key := []byte("1234567812345678f1235678") // des, 8 bytes
 	plaintext := []byte("Freda is the name of a cow.")
@@ -38,7 +35,6 @@ func main() {
 	iv := []byte("1234567890123456")
 	fmt.Printf("\nKey: %v\nPlaintext: %v\nIV: %0x\n\n", string(key), string(plaintext), string(iv))
 
-	//ciphertext, err := Encrypt(plaintext, key, nil, AES, CFB) // working: CFB, CBC, CTR, OFB
 	ciphertext, err := Encrypt(plaintext, key, nil, TDES, 0)
 	if err != nil {
 		fmt.Errorf("Couldn't encrypt: %v", err.Error())

@@ -1,10 +1,10 @@
 package main
 
 import (
-	_ "crypto/aes"
 	"crypto/rand"
 )
 
+// generateIV generates an initialization vector by using Go's rand.Read method.
 func generateIV(bytes int) []byte {
 	iv := make([]byte, bytes)
 	// Read is a helper function that calls Reader.Read using io.ReadFull

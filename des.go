@@ -4,9 +4,10 @@ import (
 	"crypto/cipher"
 	"crypto/des"
 	"errors"
-	_ "fmt"
 )
 
+// encryptDES enrypts plaintext input with passed key, IV and 3DES-flag in DES block cipher;
+// and returns ciphertext output
 func encryptDES(input, key, iv []byte, tripleDES bool) ([]byte, error) {
 	var block cipher.Block
 	var err error
@@ -32,6 +33,8 @@ func encryptDES(input, key, iv []byte, tripleDES bool) ([]byte, error) {
 	return output, nil
 }
 
+// decryptDES derypts ciphertext input with passed key and 3DES-flag
+// in DES block cipher; and returns plaintext output
 func decryptDES(input, output, key []byte, tripleDES bool) error {
 	var block cipher.Block
 	var err error
